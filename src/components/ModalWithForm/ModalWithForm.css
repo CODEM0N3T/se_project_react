@@ -40,7 +40,17 @@
 }
 
 .modal__input {
-  display: block;
+  border: none; /* Remove all borders */
+  border-bottom: 1px solid #000; /* Keep only bottom border */
+  background-color: transparent;
+  width: 100%;
+  padding: 8px 0;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal__input:focus {
+  border-bottom: 2px solid #0077ff; /* Accent color on focus */
 }
 
 .modal__radio-buttons {
