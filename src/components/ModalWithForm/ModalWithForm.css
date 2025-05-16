@@ -15,14 +15,33 @@
   visibility: visible;
 }
 
+.modal__content {
+  border-radius: 20px;
+}
+
 .modal__title {
   margin: 0;
+  margin-bottom: 24px;
+  font-size: 20px;
 }
 
 .modal__close {
   position: absolute;
   top: 20px;
   right: 28px;
+  background-image: url("/xHover.svg");
+  background-size: 20px 20px;
+  position: absolute;
+  border: none;
+  top: 24px;
+  right: 24px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  opacity: 0.4;
+  background-color: transparent;
 }
 
 .modal__content {
@@ -37,6 +56,10 @@
 .modal__form {
   display: flex;
   flex-direction: column;
+}
+
+.modal__label {
+  margin-bottom: 24px;
 }
 
 .modal__input {
@@ -58,4 +81,26 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.modal__label_type_radio {
+  gap: 11px;
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.modal__legend {
+  margin-bottom: 12px;
+}
+
+.modal__submit {
+  text-align: center;
+  width: 124px;
+  height: 36px;
+  background-color: #0000004d;
+  border: 0;
+  border-radius: 4px;
+  color: #ffff;
 }
