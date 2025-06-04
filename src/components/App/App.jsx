@@ -14,9 +14,13 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
-    temp: { F: 999 },
+    temp: { F: 999, C: 999 },
     city: "",
+    condition: "",
+    isDay: false,
   });
+  const [isWeatherDataLoaded, setIsWeatherDataLoaded] = useState(false);
+
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
@@ -44,6 +48,7 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+        setIsWeatherDataLoaded(true);
       })
       .catch(console.error);
   }, []);
@@ -59,6 +64,7 @@ function App() {
             weatherData={weatherData}
             handleCardClick={handleCardClick}
             clothingItems={clothingItems}
+            isWeatherDataLoaded={isWeatherDataLoaded}
           />
           <Footer />
         </div>
