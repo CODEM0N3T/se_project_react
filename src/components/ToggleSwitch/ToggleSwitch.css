@@ -40,6 +40,14 @@
 }
 
 .toggle-switch__checkbox:checked ~ .toggle-switch__circle {
-  right: 0;
   left: 28px;
 }
+
+.toggle-switch__text_color_white {
+  color: white;
+}
+
+/* add hover to the circle, it should get bigger when hovered, optional */
+/* when the circle is between transitioning starts to show white color of text */
+/* transfor: translateX(...)
+mix-blend-mode: ... */
