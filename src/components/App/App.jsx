@@ -13,6 +13,7 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -29,6 +30,8 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState(null);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -56,6 +59,21 @@ function App() {
     ]);
     //close modal
     closeActiveModal();
+  };
+
+  const openConfirmationModal = (card) => {
+    setCardToDelete(card);
+    setIsDeleteModalOpen(true);
+    setActiveModal("");
+  };
+
+  const handleCardDelete = () => {
+    setClothingItems((prevItems) =>
+      prevItems.filter((item) => item._id !== cardToDelete._id)
+    );
+    setIsDeleteModalOpen(false);
+    setCardToDelete(null);
+    setActiveModal(""); // Close item modal too
   };
 
   useEffect(() => {
@@ -114,6 +132,12 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={closeActiveModal}
+            onDelete={openConfirmationModal}
+          />
+          <DeleteConfirmationModal
+            isOpen={isDeleteModalOpen}
+            onClose={() => setIsDeleteModalOpen(false)}
+            onConfirm={handleCardDelete}
           />
         </div>
       </BrowserRouter>

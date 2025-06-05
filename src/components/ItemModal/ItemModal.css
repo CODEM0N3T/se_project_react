@@ -49,3 +49,18 @@
   font-size: 20px;
   margin-top: 12px;
 }
+
+.modal__delete {
+  position: absolute;
+  top: 679px;
+  right: 32px;
+  margin-left: auto;
+  color: #ff4d00;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  font-weight: 700;
+}

@@ -1,0 +1,40 @@
+.modal__content_type_confirm {
+  padding: 20px;
+  text-align: center;
+  min-width: 670px;
+  min-height: 280px;
+  border-radius: 20px;
+}
+
+.modal__text {
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+.modal__buttons {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 138px;
+  height: 24px;
+  align-items: center;
+  margin: 0 auto;
+  font-size: 20px;
+}
+
+.modal__button {
+  font-weight: bold;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.modal__button_confirm {
+  padding: 20px 20px 24px;
+  color: #ff4d00;
+  width: 200px;
+  border: none;
+  background-color: transparent;
+}
