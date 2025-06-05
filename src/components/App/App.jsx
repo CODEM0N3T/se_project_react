@@ -14,6 +14,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -50,16 +51,7 @@ function App() {
     setActiveModal("");
   };
 
-  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
-    //update clothingItems array
-    setClothingItems((prevItems) => [
-      { name, link: imageUrl, weather, _id: newId },
-      ...prevItems,
-    ]);
-    //close modal
-    closeActiveModal();
-  };
+
 
   const openConfirmationModal = (card) => {
     setCardToDelete(card);
@@ -67,14 +59,7 @@ function App() {
     setActiveModal("");
   };
 
-  const handleCardDelete = () => {
-    setClothingItems((prevItems) =>
-      prevItems.filter((item) => item._id !== cardToDelete._id)
-    );
-    setIsDeleteModalOpen(false);
-    setCardToDelete(null);
-    setActiveModal(""); // Close item modal too
-  };
+ 
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -85,6 +70,38 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        //set the clothing items using the data that was returned
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    addItem({ name, imageUrl, weather })
+      .then((newItem) => {
+        setClothingItems((prevItems) => [newItem, ...prevItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleCardDelete = () => {
+    deleteItem(cardToDelete._id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== cardToDelete._id)
+        );
+        setIsDeleteModalOpen(false);
+        setCardToDelete(null);
+        setActiveModal("");
+      })
+      .catch(console.error);
+  };
 
   return (
     <CurrentTemperatureUnitContext.Provider
