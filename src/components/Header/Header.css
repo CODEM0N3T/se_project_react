@@ -36,3 +36,8 @@
   margin: 0;
   font-size: 20px;
 }
+
+.header__user-container {
+  text-decoration: none;
+  color: #000;
+}
