@@ -3,9 +3,11 @@
 WTWR (What to Wear) is a responsive React web application that suggests appropriate clothing based on current weather data. Users can view, add, and delete garments in a virtual wardrobe, toggle between Fahrenheit and Celsius, and navigate between the main feed and a profile page.
 
 🌤 Features
+
 Live Weather Integration: Automatically fetches weather data based on coordinates and recommends clothing for the day.
 
 Temperature Unit Toggle: Users can switch between °F and °C.
+
 
 Interactive Wardrobe:
 
@@ -21,6 +23,8 @@ Profile Routing: Clicking the user’s name routes to a profile page that displa
 
 
 🖼 Screenshots
+
+
 
 🔁 Temperature Toggle
 
