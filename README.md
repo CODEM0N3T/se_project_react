@@ -63,15 +63,4 @@ WTWR (What to Wear) is a dynamic, responsive web application built with React an
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js & npm installed
-
-### Installation
-```bash
-git clone https://github.com/your-username/wtwr.git
-cd wtwr
-npm install
-npm run dev
 
