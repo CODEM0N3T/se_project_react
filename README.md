@@ -4,7 +4,6 @@ WTWR (What to Wear) is a dynamic, responsive web application built with React an
 
 ---
 
-
 ## 🌟 Features
 
 ### 🌤 Live Weather Integration
