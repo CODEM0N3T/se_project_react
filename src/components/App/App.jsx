@@ -33,6 +33,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -49,17 +50,15 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+    setIsDeleteModalOpen(false);
+    setCardToDelete(null);
   };
-
-
 
   const openConfirmationModal = (card) => {
     setCardToDelete(card);
     setIsDeleteModalOpen(true);
     setActiveModal("");
   };
-
- 
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -81,26 +80,44 @@ function App() {
       .catch(console.error);
   }, []);
 
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    setIsLoading(true);
     addItem({ name, imageUrl, weather })
       .then((newItem) => {
         setClothingItems((prevItems) => [newItem, ...prevItems]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleCardDelete = () => {
+    setIsLoading(true);
     deleteItem(cardToDelete._id)
       .then(() => {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== cardToDelete._id)
         );
-        setIsDeleteModalOpen(false);
-        setCardToDelete(null);
-        setActiveModal("");
+        closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -144,6 +161,7 @@ function App() {
             onClose={closeActiveModal}
             isOpen={activeModal === "add-garment"}
             onAddItemModalSubmit={handleAddItemModalSubmit}
+            isLoading={isLoading}
           />
           <ItemModal
             activeModal={activeModal}
@@ -155,6 +173,7 @@ function App() {
             isOpen={isDeleteModalOpen}
             onClose={() => setIsDeleteModalOpen(false)}
             onConfirm={handleCardDelete}
+            isLoading={isLoading}
           />
         </div>
       </BrowserRouter>
