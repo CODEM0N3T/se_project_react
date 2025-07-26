@@ -41,3 +41,11 @@
   text-decoration: none;
   color: #000;
 }
+
+.header__link {
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  height: 20px;
+  width: 90px;
+}

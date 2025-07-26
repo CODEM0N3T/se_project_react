@@ -1,0 +1,96 @@
+/* LoginModal.css */
+
+.modal__form-login {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+  gap: 12px;
+}
+
+.modal__title-login {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.modal__input-login {
+  border: none;
+  border-bottom: 1px solid #000;
+  padding: 10px 0;
+  font-size: 14px;
+  background-color: transparent;
+  outline: none;
+}
+
+.modal__input-login::placeholder {
+  color: #aaa;
+}
+
+.modal__submit-login {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-top: 16px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.modal__submit-login:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.modal__label-login {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.modal__alt-login {
+  /* display: flex; */
+  /* justify-content: center; */
+  gap: 8px;
+  font-size: 14px;
+  margin-top: 12px;
+  margin-bottom: auto;
+  margin-left: 130px;
+  color: #00000080;
+  font-weight: 700;
+}
+
+.modal__alt-login button {
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.modal__link-auth {
+  width: 100px;
+  height: 20px;
+  color: #00000080;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin-left: 75px;
+  padding-top: 10px;
+}
+
+.modal__submit-login {
+  margin-top: -20px;
+  width: 73px;
+  height: 36px;
+  background-color: #0000004d;
+}
+
+.modal__error-login {
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
+}

@@ -27,4 +27,42 @@ function deleteItem(id) {
   }).then(checkResponse);
 }
 
-export { getItems, addItem, deleteItem, checkResponse };
+function updateUser(data, token) {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  }).then(checkResponse);
+}
+
+function addCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+}
+
+// Protected: Remove like
+function removeCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+}
+
+export {
+  getItems,
+  addItem,
+  deleteItem,
+  addCardLike,
+  updateUser,
+  removeCardLike,
+  checkResponse,
+};
