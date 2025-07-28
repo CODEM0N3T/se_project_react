@@ -89,6 +89,10 @@
   background-color: #0000004d;
 }
 
+.modal__submit-login--active {
+  background-color: #000;
+}
+
 .modal__error-login {
   font-size: 12px;
   color: red;

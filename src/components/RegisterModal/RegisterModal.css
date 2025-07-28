@@ -38,9 +38,15 @@
   padding: 10px;
   font-size: 14px;
   border-radius: 4px;
-  margin-top: 12px;
+  margin-top: -20px;
   cursor: pointer;
   width: 100%;
+  width: 76px;
+  height: 36px;
+}
+
+.modal__submit-register--active {
+  background-color: #000;
 }
 
 .modal__submit-register:disabled {
@@ -68,4 +74,11 @@
 .modal__link-auth {
   width: 40px;
   height: 20px;
+}
+
+.modal__error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: center;
 }

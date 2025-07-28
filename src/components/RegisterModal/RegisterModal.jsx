@@ -8,6 +8,7 @@ export default function RegisterModal({
   onRegister,
   onSwitchToLogin,
   isLoading,
+  errorMessage,
 }) {
   const { values, handleChange } = useForm({
     email: "",
@@ -29,6 +30,14 @@ export default function RegisterModal({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonClassName={
+        values.email && values.password
+          ? "modal__submit-register modal__submit-register--active"
+          : "modal__submit-register"
+      }
+      isSubmitDisabled={
+        !values.email || !values.password || !values.name || !values.avatar
+      }
     >
       <label className="modal__label-register">
         Email*
@@ -78,7 +87,7 @@ export default function RegisterModal({
           className="modal__input-register"
         />
       </label>
-
+      {errorMessage && <p className="modal__error-message">{errorMessage}</p>}
       <button
         type="button"
         className="modal__link-auth"

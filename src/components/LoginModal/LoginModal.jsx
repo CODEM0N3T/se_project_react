@@ -8,6 +8,7 @@ export default function LoginModal({
   onLogin,
   onSwitchToRegister,
   isLoading,
+  loginError,
 }) {
   const { values, handleChange } = useForm({ email: "", password: "" });
 
@@ -24,6 +25,12 @@ export default function LoginModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={isLoading ? "Logging in..." : "Log In"}
+      buttonClassName={
+        values.email && values.password
+          ? "modal__submit-login modal__submit-login--active"
+          : "modal__submit-login"
+      }
+      isSubmitDisabled={!values.email || !values.password}
     >
       <label className="modal__label-login">
         Email
@@ -49,6 +56,10 @@ export default function LoginModal({
           className="modal__input"
         />
       </label>
+
+      {loginError && (
+        <span className="modal__error-login">Email or password incorrect</span>
+      )}
 
       <button
         type="button"

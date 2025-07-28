@@ -44,6 +44,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [loginError, setLoginError] = useState("");
+  const [registerError, setRegisterError] = useState("");
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -117,12 +119,21 @@ function App() {
   };
 
   const handleRegister = (data) => {
+    console.log("Sending signup data:", data);
     return signUp(data)
       .then(() => handleLogin({ email: data.email, password: data.password }))
-      .catch(console.error);
+      .catch((err) => {
+        if (err.message.includes("E11000")) {
+          // duplicate email
+          setRegisterError("Email already exists");
+        } else {
+          setRegisterError("Registration failed. Please try again.");
+        }
+      });
   };
 
   const handleLogin = ({ email, password }) => {
+    setLoginError("");
     return signIn({ email, password })
       .then((res) => {
         localStorage.setItem("jwt", res.token);
@@ -133,7 +144,10 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        setLoginError("Email or password incorrect");
+      });
   };
 
   const handleProfileUpdate = ({ name, avatar }) => {
@@ -226,11 +240,16 @@ function App() {
               isOpen={activeModal === "register"}
               onClose={closeActiveModal}
               onRegister={handleRegister}
+              onSwitchToLogin={() => setActiveModal("login")}
+              isLoading={isLoading}
+              errorMessage={registerError}
             />
             <LoginModal
               isOpen={activeModal === "login"}
               onClose={closeActiveModal}
               onLogin={handleLogin}
+              isLoading={isLoading}
+              loginError={loginError}
             />
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
