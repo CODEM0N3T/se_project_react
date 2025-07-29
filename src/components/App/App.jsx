@@ -70,14 +70,20 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getItems().then(setClothingItems).catch(console.error);
-  }, []);
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      getItems(token)
+        .then(setClothingItems)
+        .catch((err) => console.error("Item fetch error:", err));
+    }
+  }, [isLoggedIn]);
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     setIsLoading(true);
     const token = localStorage.getItem("jwt");
     addItem({ name, imageUrl, weather }, token)
       .then((newItem) => {
+        console.log("Item added:", newItem);
         setClothingItems((prevItems) => [newItem, ...prevItems]);
         closeActiveModal();
       })
@@ -106,7 +112,7 @@ function App() {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== cardToDelete._id)
         );
-        closeActiveModal();
+        setIsDeleteModalOpen(false);
       })
       .catch(console.error)
       .finally(() => setIsLoading(false));
@@ -130,6 +136,10 @@ function App() {
           setRegisterError("Registration failed. Please try again.");
         }
       });
+  };
+
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
 
   const handleLogin = ({ email, password }) => {
@@ -172,7 +182,11 @@ function App() {
 
   return (
     <CurrentTemperatureUnitContext.Provider
-      value={{ currentTemperatureUnit, setCurrentTemperatureUnit }}
+      value={{
+        currentTemperatureUnit,
+        setCurrentTemperatureUnit,
+        handleToggleSwitchChange,
+      }}
     >
       <CurrentUserContext.Provider value={currentUser}>
         <BrowserRouter>
@@ -208,6 +222,7 @@ function App() {
                         onCardClick={handleCardClick}
                         onAddClick={handleAddClick}
                         onEditProfile={() => setActiveModal("edit-profile")}
+                        onSignOut={handleSignOut}
                       />
                     ) : (
                       <Navigate to="/" replace />

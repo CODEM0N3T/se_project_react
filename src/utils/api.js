@@ -4,25 +4,41 @@ const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 
-function getItems() {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
-}
+const handleResponse = (res) => {
+  if (res.ok) return res.json();
 
-function addItem(item) {
+  return res.json().then((err) => Promise.reject(err));
+};
+
+const getItems = () => {
+  const token = localStorage.getItem("jwt");
+
+  return fetch(`${baseUrl}/items`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(handleResponse);
+};
+
+function addItem(item, token) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(item),
   }).then(checkResponse);
 }
 
-function deleteItem(id) {
+function deleteItem(id, token) {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
 }

@@ -9,7 +9,7 @@ function Header({
   handleAddClick,
   weatherData,
   isLoggedIn,
-  onSignOut,
+
   onSignInClick,
   onSignUpClick,
 }) {
@@ -60,6 +60,7 @@ function Header({
 
       {isLoggedIn && (
         <Link to="/profile" className="header__user-container">
+          <span className="header__username">{currentUser?.name}</span>
           {currentUser?.avatar ? (
             <img
               src={currentUser.avatar}

@@ -1,0 +1,15 @@
+.modal__submit-item {
+  margin-top: -20px;
+  width: 124px;
+  height: 36px;
+  background-color: #0000004d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal__submit-item--active {
+  background-color: #000;
+}

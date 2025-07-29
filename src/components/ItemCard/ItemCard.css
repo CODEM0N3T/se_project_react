@@ -5,9 +5,21 @@
   justify-content: center;
 }
 
+.card__header {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  padding: 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
 .card__name {
   display: flex;
-  position: absolute;
+  position: relative;
   top: 15px;
   background-color: #ffffff;
   font-size: 20px;
@@ -19,10 +31,24 @@
   align-items: center;
   margin: 0 auto;
   justify-content: center;
+  margin-left: 80px;
 }
 
 .card__image {
   width: 100%;
   border: 1px solid #0000004d;
   border-radius: 16px;
+}
+
+.card__like-button {
+  /* display: flex;
+  justify-content: center; */
+  /* position: absolute; */
+  margin-bottom: -35px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: -100px;
+  margin-right: 55px;
 }

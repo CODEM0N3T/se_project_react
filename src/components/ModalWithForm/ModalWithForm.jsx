@@ -27,7 +27,6 @@ function ModalWithForm({
         {children}
         <button
           type="submit"
-          // className="modal__submit modal__submit-login modal__submit-register"
           className={buttonClassName}
           disabled={isSubmitDisabled}
         >

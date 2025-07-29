@@ -1,0 +1,18 @@
+.modal__submit-edit {
+  margin-top: -20px;
+  width: 128px;
+  height: 36px;
+  background-color: #000;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.modal__label-edit {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}

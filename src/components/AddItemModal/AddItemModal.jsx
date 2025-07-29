@@ -40,6 +40,11 @@ export default function AddItemModal({
       activeModal={activeModal}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonClassName={
+        values.name && values.imageUrl && values.weather
+          ? "modal__submit-item modal__submit-item--active"
+          : "modal__submit-item"
+      }
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
