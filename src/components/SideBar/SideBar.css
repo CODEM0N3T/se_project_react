@@ -24,6 +24,7 @@
   object-fit: cover;
   margin: 0;
   margin-bottom: -43px;
+  margin-right: 16px;
 }
 
 .profile__username {
@@ -32,7 +33,6 @@
   font-size: 20px;
   font-weight: 700;
   margin-top: 23px;
-  margin-left: 20px;
 }
 
 .profile__button {
@@ -45,12 +45,16 @@
   cursor: pointer;
   display: flex;
   position: absolute;
-  margin-top: 127px;
+  margin-top: 100px;
   font-weight: 700;
   font-size: 20px;
+  background-color: transparent;
 }
 
 .profile__button_logout {
+  position: absolute;
+  margin-left: -107px;
   color: black;
-  margin-top: 195px;
+  margin-top: 130px;
+  background-color: transparent;
 }
