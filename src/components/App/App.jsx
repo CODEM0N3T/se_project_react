@@ -221,6 +221,7 @@ function App() {
                         clothingItems={clothingItems}
                         onCardClick={handleCardClick}
                         onAddClick={handleAddClick}
+                        onCardLike={handleCardLike}
                         onEditProfile={() => setActiveModal("edit-profile")}
                         onSignOut={handleSignOut}
                       />
