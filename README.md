@@ -1,7 +1,7 @@
 # 👗 WTWR — *What to Wear* (React + Vite)
 
 WTWR (What to Wear) is a dynamic, responsive web application built with React and Vite. It recommends clothing based on the current weather and lets users manage a virtual wardrobe. With features like temperature toggling, item previews, and profile routing, WTWR makes planning your outfit for the day both smart and simple.
-
+Backend: https://github.com/CODEM0N3T/se_project_express
 ---
 
 ## 🌟 Features
