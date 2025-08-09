@@ -1,4 +1,14 @@
-.footer__content {
+/* .footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  margin-top: 171px;
+} */
+.footer {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -20,3 +20,4 @@ export const Modal = ({ name, isOpen, onClose, children }) => {
     </div>
   );
 };
+export default Modal;

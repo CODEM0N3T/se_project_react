@@ -25,6 +25,7 @@ import {
   removeCardLike,
 } from "../../utils/api";
 import { checkToken, signIn, signUp } from "../../utils/auth";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -46,6 +47,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
+  const [isSavingProfile, setIsSavingProfile] = useState(false);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -65,18 +67,20 @@ function App() {
           setCurrentUser(user);
           setIsLoggedIn(true);
         })
-        .catch(console.error);
+        .catch((err) => {
+          console.error(err);
+          localStorage.removeItem("jwt"); // 👈 clear bad token
+          setCurrentUser({});
+          setIsLoggedIn(false);
+        });
     }
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      getItems(token)
-        .then(setClothingItems)
-        .catch((err) => console.error("Item fetch error:", err));
-    }
-  }, [isLoggedIn]);
+    getItems()
+      .then(setClothingItems)
+      .catch((err) => console.error("Item fetch error:", err));
+  }, []);
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     setIsLoading(true);
@@ -162,11 +166,17 @@ function App() {
 
   const handleProfileUpdate = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
+    setIsSavingProfile(true);
     return updateUser({ name, avatar }, token)
-      .then(setCurrentUser)
-      .catch(console.error);
+      .then((user) => {
+        setCurrentUser(user);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => setIsSavingProfile(false));
   };
-
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setActiveModal("preview");
@@ -216,7 +226,7 @@ function App() {
                 <Route
                   path="/profile"
                   element={
-                    isLoggedIn ? (
+                    <ProtectedRoute isLoggedIn={isLoggedIn}>
                       <Profile
                         clothingItems={clothingItems}
                         onCardClick={handleCardClick}
@@ -225,9 +235,7 @@ function App() {
                         onEditProfile={() => setActiveModal("edit-profile")}
                         onSignOut={handleSignOut}
                       />
-                    ) : (
-                      <Navigate to="/" replace />
-                    )
+                    </ProtectedRoute>
                   }
                 />
               </Routes>
@@ -266,12 +274,13 @@ function App() {
               onLogin={handleLogin}
               isLoading={isLoading}
               loginError={loginError}
+              onSwitchToRegister={() => setActiveModal("register")}
             />
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}
-              currentUser={currentUser}
               onUpdateUser={handleProfileUpdate}
+              isLoading={isSavingProfile}
             />
           </div>
         </BrowserRouter>
