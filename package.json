@@ -2,12 +2,14 @@
   "name": "se_project_react",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://wtwr.hbmc.net/",
   "type": "module",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && scp -r ./dist/* codem0n3t@wtwr.hbmc.net:/home/codem0n3t/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
